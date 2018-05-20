@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+			
+	<artifactId>db-model</artifactId>
+	<name>db-model</name>
+	<packaging>jar</packaging>
+	<description>Auto generated DB model</description>
+	
+	<parent>
+		<groupId>com.example</groupId>
+		<artifactId>st-heroku-backend</artifactId>
+		<version>0.0.1-SNAPSHOT</version>		
+	</parent>
+
+	<properties>
+		<!-- these params are only used for generating the db-model, only needed during dev -->
+		<db.url>jdbc:postgresql://localhost:5432/stHerokuBackendDb</db.url>
+		<db.user>postgres</db.user>
+		<db.password>postgres</db.password>
+	</properties>
+
+	<dependencies>
+
+		<dependency>
+			<groupId>org.postgresql</groupId>
+			<artifactId>postgresql</artifactId>
+		</dependency>
+
+		<!-- for health and info checks -->
+		<!--<dependency>-->
+			<!--<groupId>org.springframework.boot</groupId>-->
+			<!--<artifactId>spring-boot-starter-actuator</artifactId>-->
+		<!--</dependency>-->
+
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-jooq</artifactId>
+		</dependency>
+
+	</dependencies>
+
+	<build>
+		<plugins>
+			<!--<plugin>-->
+				<!--<groupId>org.flywaydb</groupId>-->
+				<!--<artifactId>flyway-maven-plugin</artifactId>-->
+				<!--<version>${flyway.version}</version>-->
+				<!--<configuration>-->
+					<!--<driver>${db.driver}</driver>-->
+					<!--<url>${db.url}</url>-->
+					<!--<user>${db.user}</user>-->
+					<!--<password>${db.password}</password>-->
+					<!--<schemas><schema>${db.schema}</schema></schemas>-->
+					<!--<locations>-->
+						<!--<location>filesystem:src/main/resources/db-migration</location>-->
+					<!--</locations>-->
+				<!--</configuration>-->
+				<!--<dependencies>-->
+					<!--<dependency>-->
+						<!--<groupId>org.flywaydb</groupId>-->
+						<!--<artifactId>flyway-core</artifactId>-->
+						<!--<version>${flyway.version}</version>-->
+					<!--</dependency>-->
+				<!--</dependencies>-->
+			<!--</plugin>-->
+
+			<plugin>
+				<groupId>org.jooq</groupId>
+				<artifactId>jooq-codegen-maven</artifactId>
+				<version>${jooq.version}</version>
+
+				<!-- The plugin should hook into the generate goal -->
+				<executions>
+					<execution>
+						<goals>
+							<goal>generate</goal>
+						</goals>
+					</execution>
+				</executions>
+
+				<configuration>
+					<skip>${jooq.skip.generation}</skip>
+
+					<!-- JDBC connection parameters -->
+					<jdbc>
+						<driver>${db.driver}</driver>
+						<url>${db.url}</url>
+						<user>${db.user}</user>
+						<password>${db.password}</password>
+					</jdbc>
+
+					<!-- Generator parameters -->
+					<generator>
+						<database>
+							<name>org.jooq.util.postgres.PostgresDatabase</name>
+							<includes>.*</includes>
+							<excludes>
+								flyway_schema_history
+							</excludes>
+							<inputSchema>${db.schema}</inputSchema>
+							<!-- enables functions in select statements -->
+							<tableValuedFunctions>true</tableValuedFunctions>
+						</database>
+						<target>
+							<packageName>com.example.stherokubackend.database</packageName>
+							<directory>src/main/java</directory>
+						</target>
+					</generator>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+
+
+</project>
