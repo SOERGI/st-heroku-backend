@@ -75,7 +75,7 @@
 							<goal>generate</goal>
 						</goals>
 						<configuration>
-							<inputSpec>${project.basedir}/../api-spec/src/main/resources/external.yaml</inputSpec>
+							<inputSpec>${project.basedir}/../api-spec/src/main/resources/external.json</inputSpec>
 							<language>spring</language>
 							<modelPackage>io.swagger.api.external.model</modelPackage>
 							<groupId>${project.groupId}</groupId>

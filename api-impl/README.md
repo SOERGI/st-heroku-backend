@@ -107,11 +107,9 @@ Use the following to run the codegen only `mvn jooq-codegen:generate`
 * Maven dependency graph `mvn dependency:build-classpath`
 
 ## Next steps
-* add a basic webapp as subproject and generate the client REST models into it
-* use json instead of yaml?
-* add some data we can query
 * write a rest endpoint to query data
 * write a rest endpoint to insert data
+* add some data we can query
 
 ## Decisions
 * How to split the git repos for frontend/backend/generated code:
