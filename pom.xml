@@ -35,9 +35,9 @@
 		<!--<javax.el-api.version>3.0.0</javax.el-api.version>-->
 		<flyway.version>5.0.7</flyway.version>
 		<db.driver>org.postgresql.Driver</db.driver>
-		<db.url>${spring.datasource.url}</db.url>
-		<db.user>${spring.datasource.username}</db.user>
-		<db.password>${spring.datasource.password}</db.password>
+		<db.url></db.url>
+		<db.user></db.user>
+		<db.password></db.password>
 		<db.schema>stherokubackend_dev</db.schema>
 	</properties>
 
@@ -56,7 +56,52 @@
 		</repository>
 	</repositories>
 
-	<dependencies>		
+	<dependencies>
+		<!-- for reading the environment variable of heroku and write it into properties-->
+		<!-- https://stackoverflow.com/questions/27954841/heroku-database-url-as-a-jdbc-url-for-maven -->
+        <dependency>
+            <groupId>org.codehaus.groovy</groupId>
+            <artifactId>groovy-all</artifactId>
+            <version>2.4.15</version>
+            <scope>compile</scope>
+        </dependency>
 	</dependencies>
+
+	<build>
+		<plugins>
+			<!-- for reading the environment variable of heroku and write it into properties-->
+			<!-- postgres://user:password@host:port/dbName -->
+			<plugin>
+				<groupId>org.codehaus.gmavenplus</groupId>
+				<artifactId>gmavenplus-plugin</artifactId>
+				<version>1.2</version>
+				<executions>
+					<execution>
+						<phase>initialize</phase>
+						<goals>
+							<goal>execute</goal>
+						</goals>
+					</execution>
+				</executions>
+				<configuration>
+					<scripts>
+						<script><![CDATA[
+				URI dbUri = new URI(System.getenv("DATABASE_URL"));
+
+				String username = dbUri.getUserInfo().split(":")[0];
+				String password = dbUri.getUserInfo().split(":")[1];
+				int port = dbUri.getPort();
+
+				String dbUrl = "jdbc:postgresql://" + dbUri.getHost() + ":" + port + dbUri.getPath();
+
+				project.properties['db.url']=dbUrl
+				project.properties['db.user']=username
+				project.properties['database.password']=password
+				]]></script>
+					</scripts>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
 
 </project>

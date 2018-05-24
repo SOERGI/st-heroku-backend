@@ -100,13 +100,14 @@ Use the following to run the codegen only `mvn jooq-codegen:generate`
 * [Online swagger editor](http://editor.swagger.io/#/)
 * [SpringFox](http://springfox.github.io/springfox/docs/current/#maven) library to use swagger for spring boot and java.
 * [Codegen mvn plugin](https://github.com/swagger-api/swagger-codegen/blob/master/modules/swagger-codegen-maven-plugin/README.md)
-* run mvn compile
-* run mvn clean package
 
 ## Build
 * Maven dependency graph `mvn dependency:build-classpath`
+* to build the whole project with subprojects run `mvn clean install`
 
 ## Next steps
+* set up flyway
+* set up heroku and deploy on it
 * write a rest endpoint to query data
 * write a rest endpoint to insert data
 * add some data we can query

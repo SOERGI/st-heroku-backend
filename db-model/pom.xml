@@ -16,9 +16,9 @@
 
 	<properties>
 		<!-- these params are only used for generating the db-model, only needed during dev -->
-		<db.url>jdbc:postgresql://localhost:5432/stHerokuBackendDb</db.url>
-		<db.user>postgres</db.user>
-		<db.password>postgres</db.password>
+		<!--<db.url>jdbc:postgresql://localhost:5432/stHerokuBackendDb</db.url>-->
+		<!--<db.user>postgres</db.user>-->
+		<!--<db.password>postgres</db.password>-->
 	</properties>
 
 	<dependencies>
@@ -43,28 +43,28 @@
 
 	<build>
 		<plugins>
-			<!--<plugin>-->
-				<!--<groupId>org.flywaydb</groupId>-->
-				<!--<artifactId>flyway-maven-plugin</artifactId>-->
-				<!--<version>${flyway.version}</version>-->
-				<!--<configuration>-->
-					<!--<driver>${db.driver}</driver>-->
-					<!--<url>${db.url}</url>-->
-					<!--<user>${db.user}</user>-->
-					<!--<password>${db.password}</password>-->
-					<!--<schemas><schema>${db.schema}</schema></schemas>-->
-					<!--<locations>-->
-						<!--<location>filesystem:src/main/resources/db-migration</location>-->
-					<!--</locations>-->
-				<!--</configuration>-->
-				<!--<dependencies>-->
-					<!--<dependency>-->
-						<!--<groupId>org.flywaydb</groupId>-->
-						<!--<artifactId>flyway-core</artifactId>-->
-						<!--<version>${flyway.version}</version>-->
-					<!--</dependency>-->
-				<!--</dependencies>-->
-			<!--</plugin>-->
+			<plugin>
+				<groupId>org.flywaydb</groupId>
+				<artifactId>flyway-maven-plugin</artifactId>
+				<version>${flyway.version}</version>
+				<configuration>
+					<driver>${db.driver}</driver>
+					<url>${db.url}</url>
+					<user>${db.user}</user>
+					<password>${db.password}</password>
+					<schemas><schema>${db.schema}</schema></schemas>
+					<locations>
+						<location>filesystem:src/main/resources/db-migration</location>
+					</locations>
+				</configuration>
+				<dependencies>
+					<dependency>
+						<groupId>org.flywaydb</groupId>
+						<artifactId>flyway-core</artifactId>
+						<version>${flyway.version}</version>
+					</dependency>
+				</dependencies>
+			</plugin>
 
 			<plugin>
 				<groupId>org.jooq</groupId>
