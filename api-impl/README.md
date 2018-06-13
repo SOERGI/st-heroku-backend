@@ -100,17 +100,21 @@ Use the following to run the codegen only `mvn jooq-codegen:generate`
 * [Online swagger editor](http://editor.swagger.io/#/)
 * [SpringFox](http://springfox.github.io/springfox/docs/current/#maven) library to use swagger for spring boot and java.
 * [Codegen mvn plugin](https://github.com/swagger-api/swagger-codegen/blob/master/modules/swagger-codegen-maven-plugin/README.md)
+* [Spec](https://swagger.io/docs/specification/2-0/)
+* [api editor](https://mermade.github.io/openapi-gui/) but for OAS 3.0
 
 ## Build
 * Maven dependency graph `mvn dependency:build-classpath`
 * to build the whole project with subprojects run `mvn clean install`
 
 ## Next steps
-* set up flyway
-* set up heroku and deploy on it
+* learn and add jooq code
+* learn basics of spring boot
 * write a rest endpoint to query data
 * write a rest endpoint to insert data
+* deploy simple jar for api on webfaction
 * add some data we can query
+* use firestore app to reuse frontend
 
 ## Decisions
 * How to split the git repos for frontend/backend/generated code:
@@ -123,4 +127,5 @@ Use the following to run the codegen only `mvn jooq-codegen:generate`
 * Where do we deploy frontend and backend, which service do we use?
     * as the frontend will be angular and prod build will produce static files that contain html/css/js, which only need a simple webserver, it might make sense to move those to AWS S3 + clodefront that can serve then easily and is cheaper than heroku. At the same time we can ping the backend every 29 mins so it does not sleep
     * to deploy the backend we need a server that can run jar files and that scales. Heroku offers itself. Since running a jar file is not terribly complicated, at a later point in time it could be worthwhile to investigate aws for this purpose.
+    * However, setting up heroku to work with jooq, postgres and flyway is somewhat cumbersome. Also we do not really know if and when we need to scale. It might be more effective to develop deploy on webfaction and make sure we can see the workload and adapt accordingly
 

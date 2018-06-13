@@ -8,16 +8,9 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.stereotype.*;
 import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
-@Controller
 @SpringBootApplication
-//@EnableSwagger2
+@EnableSwagger2
 public class DemoApplication {
-
-    @RequestMapping("/home")
-    @ResponseBody
-    String home() {
-      return "Hello World2!";
-    }
 
     public static void main(String[] args) {
         Profile p = null;

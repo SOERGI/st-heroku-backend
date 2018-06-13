@@ -78,6 +78,8 @@
 							<inputSpec>${project.basedir}/../api-spec/src/main/resources/external.json</inputSpec>
 							<language>spring</language>
 							<modelPackage>io.swagger.api.external.model</modelPackage>
+                            <apiPackage>io.swagger.api.external.api</apiPackage>
+                            <invokerPackage>io.swagger.api.external.invoker</invokerPackage>
 							<groupId>${project.groupId}</groupId>
 							<artifactId>${project.artifactId}</artifactId>
 							<artifactVersion>${project.version}</artifactVersion>
